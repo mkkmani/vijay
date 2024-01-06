@@ -1,0 +1,43 @@
+.admin-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 50vh;
+}
+
+.admin-login-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 30px;
+  border: 2px solid black;
+  border-radius: 10px;
+}
+
+.label-input {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.input {
+  padding: 4px;
+  border-radius: 8px;
+  border: 1px solid black;
+}
+
+.err-msg {
+  font-size: 12px;
+  color: red;
+}
+
+.login-btn {
+  padding: 4px 12px;
+  margin-top: 6px;
+  background: none;
+  border-radius: 12px;
+  border: 1px solid black;
+  width: 100%;
+}
