@@ -38,24 +38,32 @@ const ManageRoute = () => {
     e.preventDefault();
     setSuccess(false);
     const details = { name: name, link: imageLink };
-    const api = "https://vijayarts.onrender.com/admin/gallery/add";
+    const api = "http://localhost:8000/admin/gallery/add";
     const options = {
       method: "POST",
       headers: {
+        "Content-Type": "application/json",
         authorization: `Bearer ${token}`,
       },
       body: JSON.stringify(details),
     };
 
     try {
+      console.log("entered try");
+      console.log("response fetching started");
+      console.log("data transmitting l 54", details);
       const response = await fetch(api, options);
+      console.log("response fetching completed");
+      console.log(response);
       const data = await response.json();
       setStatusMessage(data.message);
+
       setSuccess(true);
     } catch (error) {
       console.error("error in image adding", error);
     }
   };
+
   if (token === undefined) {
     return <Redirect to="/admin" />;
   }

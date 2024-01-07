@@ -3,6 +3,7 @@ import "./App.css";
 import { Switch, Route } from "react-router-dom";
 import Header from "./components/Header";
 import HomePage from "./components/Homepage";
+import ArtsPage from "./components/Artspage";
 import Contact from "./components/Contact";
 import Admin from "./components/Admin";
 import ManageRoute from "./components/ManageRoute";
@@ -12,6 +13,7 @@ const App = () => (
     <Header />
     <Switch>
       <Route exact path="/" component={HomePage} />
+      <Route exact path="/arts" component={ArtsPage} />
       <Route exact path="/admin" component={Admin} />
       <Route exact path="/manage" component={ManageRoute} />
       <Route exact path="/contact" component={Contact} />

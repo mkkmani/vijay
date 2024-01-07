@@ -24,7 +24,7 @@ const Admin = () => {
   const onClickLogin = async (e) => {
     e.preventDefault();
     try {
-      const apiUrl = "https://vijayarts.onrender.com/admin/login";
+      const apiUrl = "http://localhost:8000/admin/login";
       const details = {
         username: loginData.username,
         password: loginData.password,
