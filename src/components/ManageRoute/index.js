@@ -1,8 +1,7 @@
 import "./index.css";
-import { Redirect } from "react-router-dom";
+import { Redirect, useHistory } from "react-router-dom";
 import Cookies from "js-cookie";
 import { useState } from "react";
-import Header from "../Header";
 
 const ManageRoute = () => {
   const [activeOption, setActiveOption] = useState(null);
@@ -12,6 +11,7 @@ const ManageRoute = () => {
   const [statusMessage, setStatusMessage] = useState("");
   const [success, setSuccess] = useState(false);
   const token = Cookies.get("artToken");
+  const history = useHistory();
 
   const activateOption = (e) => {
     setActiveOption(e.target.name);
@@ -27,6 +27,11 @@ const ManageRoute = () => {
 
   const onChangeImageId = (e) => {
     setImageId(e.target.value);
+  };
+
+  const onClickLogout = () => {
+    Cookies.remove("artToken");
+    history.push("/");
   };
 
   const submitImageDetails = async (e) => {
@@ -56,9 +61,11 @@ const ManageRoute = () => {
   }
   return (
     <>
-      <Header />
       <div className="manage-container">
         <h1>Manage your page here</h1>
+        <button type="button" className="logout-btn" onClick={onClickLogout}>
+          Logout
+        </button>
         <div className="manage-div">
           <div className="options-container">
             <button

@@ -1,18 +1,146 @@
 .home-container {
+  margin-top: 80px;
+  width: 100vw;
   display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  min-height: 50vh;
+  flex-direction: row;
+  justify-content: space-between;
+  overflow-x: hidden;
 }
 
-.btn-container {
+.welcome-div {
+  order: 0;
+  flex: 3;
+  padding-left: 24px;
+}
+
+.welcome {
+  font-family: "Playfair Display";
+  font-size: 34px;
+  font-weight: 700;
+  line-height: 77px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: #25282b;
+}
+
+.tag-line {
+  font-family: "Nunito";
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 27px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: #444444;
+}
+
+.home-desc {
+  font-family: "Nunito";
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 36px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: #777777;
+}
+
+.home-img-div {
+  order: 1;
+  flex: 2;
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
-.vijay-img {
-  width: 200px;
+.home-img {
+  width: 100%;
+}
+
+.custom-div {
+  padding: 30px;
+}
+
+.custom-msg {
+  font-family: "Comfortaa";
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 32px;
+  letter-spacing: 0px;
+  text-align: left;
+  color: #25282b;
+}
+
+.custom-desc {
+  font-family: "Nunito";
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 27px;
+  letter-spacing: 0px;
+  text-align: left;
+  color: #828282;
+}
+
+.custom-btn-div {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.custom-btn {
+  width: 115px;
+  height: 43px;
+  padding: 8px 24px;
+  border-radius: 8px;
+  margin: 10px;
+  border: 1px solid #25282b;
+  background: none;
+  cursor: pointer;
+}
+
+.explore-btn {
+  background-color: #fdc435;
+  border: none;
+}
+
+@media screen and (max-width: 567px) {
+  .home-container {
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+  }
+
+  .welcome-div {
+    order: 1;
+    flex: none;
+    padding: 8px;
+  }
+
+  .welcome,
+  .tag-line,
+  .custom-msg,
+  .custom-desc {
+    text-align: center;
+  }
+
+  .home-desc {
+    text-align: center;
+    font-size: 20px;
+  }
+
+  .home-img-div {
+    order: 0;
+    flex: none;
+  }
+
+  .custom-div {
+    padding: 8px;
+  }
+
+  .custom-btn-div {
+    flex-direction: column;
+  }
+}
+
+.ccc {
+  margin-bottom: 190px;
 }

@@ -69,3 +69,7 @@
   text-align: center;
   color: lightgreen;
 }
+
+.logout-btn {
+  cursor: pointer;
+}

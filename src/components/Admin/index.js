@@ -1,14 +1,20 @@
 import "./index.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import Cookies from "js-cookie";
-import Header from "../Header";
 
 const Admin = () => {
   const [loginData, setLoginData] = useState({ username: "", password: "" });
   const [showErr, setShowErrMsg] = useState("");
   const [errMsg, setErrMsg] = useState(false);
   const history = useHistory();
+
+  useEffect(() => {
+    const token = Cookies.get("artToken");
+    if (token !== undefined) {
+      history.push("/manage");
+    }
+  });
 
   const onChangeInput = (e) => {
     const { name, value } = e.target;
@@ -48,7 +54,6 @@ const Admin = () => {
 
   return (
     <div>
-      <Header />
       <div className="admin-container">
         <div>
           <form className="admin-login-form" onSubmit={onClickLogin}>
