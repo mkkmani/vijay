@@ -40,8 +40,7 @@ const Admin = () => {
       const response = await fetch(apiUrl, options);
       const data = await response.json();
       if (response.ok) {
-        console.log("data from api l", data);
-        Cookies.set("artToken", data.jwt_token, { expires: 2 });
+        Cookies.set("artToken", data.jwt_token, { expires: 2 / 24 });
         history.push("/manage");
       } else {
         setShowErrMsg(true);
