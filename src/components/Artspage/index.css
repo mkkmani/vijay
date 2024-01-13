@@ -26,3 +26,9 @@
 .arts-h1 {
   text-align: center;
 }
+
+.loader-container {
+  min-height: 40vh;
+  justify-content: center;
+  align-items: center;
+}

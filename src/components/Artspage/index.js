@@ -1,5 +1,6 @@
 import "./index.css";
 import { useState, useEffect } from "react";
+import { TailSpin } from "react-loader-spinner";
 
 const apiStatusList = {
   init: "INIT",
@@ -39,7 +40,17 @@ const ArtsPage = () => {
   let content;
   switch (apiStatus) {
     case apiStatusList.loading:
-      content = <h2>Loading arts...</h2>;
+      content = (
+        <div className="loader-container">
+          <TailSpin
+            height="60"
+            width="60"
+            radius="9"
+            color="skyblue"
+            ariaLabel="three-dots-loading"
+          />
+        </div>
+      );
       break;
     case apiStatusList.success:
       content =
