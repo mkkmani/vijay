@@ -12,10 +12,29 @@ const Contact = () => {
     setComment(e.target.value);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Submitted comment:", comment);
-    setComment("");
+    try {
+      const details = { comment };
+      const api = "https://vijayarts.onrender.com/comment";
+      const options = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(details),
+      };
+
+      const response = await fetch(api, options);
+
+      if (response.ok) {
+        setComment("");
+      } else {
+        console.error(`Failed to submit comment. Status: ${response.status}`);
+      }
+    } catch (e) {
+      console.error("error in sending response", e.message);
+    }
   };
 
   const handleDetailsChange = (e) => {
@@ -27,11 +46,26 @@ const Contact = () => {
     }
   };
 
-  const handleDetailsSubmit = (e) => {
+  const handleDetailsSubmit = async (e) => {
     e.preventDefault();
-    console.log("Submitted details:", { name, contactInfo });
-    setName("");
-    setContactInfo("");
+    try {
+      const details = { name, contact: contactInfo };
+      const api = "https://vijayarts.onrender.com/contact";
+      const options = {
+        method: "POST",
+        "Content-Type": "application/json",
+        body: JSON.stringify(details),
+      };
+      const response = await fetch(api, options);
+      if (response.ok) {
+        setName("");
+        setContactInfo("");
+      } else {
+        console.error(`error in sending the details`);
+      }
+    } catch (e) {
+      console.error(`error in sending the response. ${e.message}`);
+    }
   };
 
   const handleInstagramClick = () => {
