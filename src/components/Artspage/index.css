@@ -12,6 +12,8 @@
   justify-content: space-around;
   flex-wrap: wrap;
   list-style-type: none;
+  margin: 0;
+  padding: 0;
 }
 
 .gallery-image {
@@ -19,4 +21,8 @@
   height: 250px;
   margin: 10px;
   border-radius: 8px;
+}
+
+.arts-h1 {
+  text-align: center;
 }

@@ -1,7 +1,7 @@
 .manage-container {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   min-height: 50vh;
   margin-top: 100px;
@@ -9,6 +9,14 @@
 
 .manage-container h1 {
   font-size: 22px;
+}
+
+.logout-btn-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  margin-left: auto;
+  padding-right: 40px;
 }
 
 .manage-div,
@@ -55,8 +63,12 @@
   cursor: pointer;
 }
 
-.form-btn:hover {
-  background-color: lightgreen;
+.add:hover {
+  background-color: green;
+}
+
+.delete:hover {
+  background-color: red;
 }
 
 .status-msg {
@@ -73,4 +85,10 @@
 
 .logout-btn {
   cursor: pointer;
+  align-self: flex-end;
+}
+
+.table-row {
+  border: 1px solid gray;
+  padding: 2px 8px;
 }

@@ -24,7 +24,7 @@ const Admin = () => {
   const onClickLogin = async (e) => {
     e.preventDefault();
     try {
-      const apiUrl = "http://localhost:8000/admin/login";
+      const apiUrl = "https://vijayarts.onrender.com/admin/login";
       const details = {
         username: loginData.username,
         password: loginData.password,
@@ -36,18 +36,20 @@ const Admin = () => {
         },
         body: JSON.stringify(details),
       };
-
+      //   console.log("data", details);
+      //   console.log("fetching started");
       const response = await fetch(apiUrl, options);
       const data = await response.json();
+      //   console.log("fetched data", data);
       if (response.ok) {
-        Cookies.set("artToken", data.jwt_token, { expires: 2 / 24 });
+        Cookies.set("artToken", data.jwtToken, { expires: 1 / 24 });
         history.push("/manage");
       } else {
         setShowErrMsg(true);
-        setErrMsg(data.message);
+        setErrMsg(data.error);
       }
     } catch (error) {
-      console.log("error in data fetching call", error);
+      console.error("error in data fetching call");
     }
   };
 
