@@ -11,6 +11,7 @@ const ManageRoute = () => {
   const [statusMessage, setStatusMessage] = useState([]);
   const [success, setSuccess] = useState(false);
   const [comments, setComments] = useState([]);
+  const [contacts, setContacts] = useState([]);
   const token = Cookies.get("artToken");
   const history = useHistory();
 
@@ -66,7 +67,7 @@ const ManageRoute = () => {
   const removeImage = async (e) => {
     e.preventDefault();
     const api = "https://vijayarts.onrender.com/gallery";
-    const details = { id: imageId };
+    const details = { name: imageId };
     const options = {
       method: "DELETE",
       headers: {
@@ -77,6 +78,7 @@ const ManageRoute = () => {
     };
     const result = await fetch(api, options);
     const data = result.json();
+    console.log("remove image data", data);
   };
 
   const viewComments = async (e) => {
@@ -98,6 +100,27 @@ const ManageRoute = () => {
       setComments(updatedData);
     } catch (error) {
       console.error("Error fetching comments:", error.message);
+    }
+  };
+
+  const viewContacts = async (e) => {
+    e.preventDefault();
+    setActiveOption(e.target.name);
+    const api = "https://vijayarts.onrender.com/contact";
+    const options = {
+      method: "GET",
+    };
+    try {
+      const res = await fetch(api, options);
+      const data = await res.json();
+      const updatedData = data.contacts.map((contact) => ({
+        name: contact.name,
+        contact: contact.contact,
+        id: contact._id,
+      }));
+      setContacts(updatedData);
+    } catch (e) {
+      console.error("error in data fetching", e.message);
     }
   };
 
@@ -226,6 +249,35 @@ const ManageRoute = () => {
                   </table>
                 ) : (
                   <p>No comments or suggestions available now</p>
+                )}
+              </div>
+            )}
+          </div>
+
+          <div className="options-container">
+            <button
+              type="button"
+              name="contact"
+              className="manage-btn"
+              onClick={viewContacts}
+            >
+              View Contacts received
+            </button>
+            {activeOption === "contact" && (
+              <div>
+                {contacts.length > 0 ? (
+                  <table>
+                    <tbody>
+                      {contacts.map((contact) => (
+                        <tr key={contact.id}>
+                          <td className="table-row">{contact.name}</td>
+                          <td className="table-row">{contact.contact}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                ) : (
+                  <p>No contacts received</p>
                 )}
               </div>
             )}

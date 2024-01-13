@@ -7,6 +7,8 @@ const Contact = () => {
   const [comment, setComment] = useState("");
   const [name, setName] = useState("");
   const [contactInfo, setContactInfo] = useState("");
+  const [commentSubmissionStatus, setCommentSubmissionStatus] = useState(null);
+  const [detailsSubmissionStatus, setDetailsSubmissionStatus] = useState(null);
 
   const handleChange = (e) => {
     setComment(e.target.value);
@@ -14,6 +16,8 @@ const Contact = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setDetailsSubmissionStatus(null);
+    setCommentSubmissionStatus(null);
     try {
       const details = { comment };
       const api = "https://vijayarts.onrender.com/comment";
@@ -29,11 +33,14 @@ const Contact = () => {
 
       if (response.ok) {
         setComment("");
+        setCommentSubmissionStatus("success");
       } else {
         console.error(`Failed to submit comment. Status: ${response.status}`);
+        setCommentSubmissionStatus("error");
       }
     } catch (e) {
-      console.error("error in sending response", e.message);
+      console.error("Error in sending response", e.message);
+      setCommentSubmissionStatus("error");
     }
   };
 
@@ -48,23 +55,34 @@ const Contact = () => {
 
   const handleDetailsSubmit = async (e) => {
     e.preventDefault();
+    setDetailsSubmissionStatus(null);
+    setCommentSubmissionStatus(null);
     try {
       const details = { name, contact: contactInfo };
       const api = "https://vijayarts.onrender.com/contact";
       const options = {
         method: "POST",
-        "Content-Type": "application/json",
+        headers: {
+          "Content-Type": "application/json",
+        },
         body: JSON.stringify(details),
       };
+
       const response = await fetch(api, options);
+
       if (response.ok) {
         setName("");
         setContactInfo("");
+        setDetailsSubmissionStatus("success");
       } else {
-        console.error(`error in sending the details`);
+        console.error(
+          `Error in sending the details. Status: ${response.status}`
+        );
+        setDetailsSubmissionStatus("error");
       }
     } catch (e) {
-      console.error(`error in sending the response. ${e.message}`);
+      console.error(`Error in sending the response. ${e.message}`);
+      setDetailsSubmissionStatus("error");
     }
   };
 
@@ -102,37 +120,53 @@ const Contact = () => {
             Comment
           </button>
         </form>
-        <form className="drop-form" onSubmit={handleDetailsSubmit}>
-          <h3 className="comment-text">Drop us your details</h3>
-          <div className="contact-label-input">
-            <label htmlFor="name" className="contact-label">
-              Name
-            </label>
-            <input
-              id="name"
-              className="contact-input"
-              placeholder="Your name..."
-              value={name}
-              onChange={handleDetailsChange}
-            />
-          </div>
-          <div className="contact-label-input">
-            <label htmlFor="contact" className="contact-label">
-              Contact
-            </label>
-            <input
-              id="contact"
-              className="contact-input"
-              placeholder="Whatsapp or email..."
-              value={contactInfo}
-              onChange={handleDetailsChange}
-            />
-          </div>
-          <button type="submit" className="comment-btn">
-            Send
-          </button>
-        </form>
+        {commentSubmissionStatus === "success" && (
+          <p className="success-message">Received your response</p>
+        )}
+        {commentSubmissionStatus === "error" && (
+          <p className="error-message">
+            Error submitting comment. Please try again.
+          </p>
+        )}
       </div>
+      <form className="drop-form" onSubmit={handleDetailsSubmit}>
+        <h3 className="comment-text">Drop us your details</h3>
+        <div className="contact-label-input">
+          <label htmlFor="name" className="contact-label">
+            Name
+          </label>
+          <input
+            id="name"
+            className="contact-input"
+            placeholder="Your name..."
+            value={name}
+            onChange={handleDetailsChange}
+          />
+        </div>
+        <div className="contact-label-input">
+          <label htmlFor="contact" className="contact-label">
+            Contact
+          </label>
+          <input
+            id="contact"
+            className="contact-input"
+            placeholder="Whatsapp or email..."
+            value={contactInfo}
+            onChange={handleDetailsChange}
+          />
+        </div>
+        <button type="submit" className="comment-btn">
+          Send
+        </button>
+        {detailsSubmissionStatus === "success" && (
+          <p className="success-message">Your details submitted successfully</p>
+        )}
+        {detailsSubmissionStatus === "error" && (
+          <p className="error-message">
+            Error submitting details. Please try again.
+          </p>
+        )}
+      </form>
       <div className="contact-div">
         <p className="comment-text">Reach us on</p>
         <div className="icons-div">

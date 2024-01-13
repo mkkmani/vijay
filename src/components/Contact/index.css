@@ -89,3 +89,15 @@
   margin: 0px 10px;
   cursor: pointer;
 }
+
+.success-message {
+  color: green;
+  margin: 0;
+  margin-top: 4px;
+}
+
+.error-message {
+  color: red;
+  margin: 0;
+  margin-top: 4px;
+}
