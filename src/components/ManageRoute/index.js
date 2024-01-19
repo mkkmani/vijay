@@ -15,6 +15,8 @@ const ManageRoute = () => {
   const token = Cookies.get("artToken");
   const history = useHistory();
 
+  const baseApi = process.env.REACT_APP_API_BASE_URL;
+
   const activateOption = (e) => {
     setActiveOption(e.target.name);
   };
@@ -40,7 +42,7 @@ const ManageRoute = () => {
     e.preventDefault();
     setSuccess(false);
     const details = { name: name, imageUrl: imageLink };
-    const api = "https://vijayarts.onrender.com/gallery";
+    const api = `${baseApi}/gallery`;
     const options = {
       method: "POST",
       headers: {
@@ -66,7 +68,8 @@ const ManageRoute = () => {
 
   const removeImage = async (e) => {
     e.preventDefault();
-    const api = "https://vijayarts.onrender.com/gallery";
+
+    const api = `${baseApi}/gallery`;
     const details = { name: imageId };
     const options = {
       method: "DELETE",
@@ -83,7 +86,7 @@ const ManageRoute = () => {
 
   const viewComments = async (e) => {
     setActiveOption(e.target.name);
-    const api = "https://vijayarts.onrender.com/comments";
+    const api = `${baseApi}/comments`;
     const options = {
       method: "GET",
     };
@@ -96,7 +99,7 @@ const ManageRoute = () => {
         id: each._id,
         comment: each.comment,
       }));
-      console.log("updated data", updatedData);
+      //   console.log("updated data", updatedData);
       setComments(updatedData);
     } catch (error) {
       console.error("Error fetching comments:", error.message);
@@ -106,7 +109,7 @@ const ManageRoute = () => {
   const viewContacts = async (e) => {
     e.preventDefault();
     setActiveOption(e.target.name);
-    const api = "https://vijayarts.onrender.com/contact";
+    const api = `${baseApi}/contact`;
     const options = {
       method: "GET",
     };
@@ -179,11 +182,8 @@ const ManageRoute = () => {
                     Add image
                   </button>
                 </div>
-                {statusMessage.message !== "" && (
-                  <p className="status-msg">{`${statusMessage.message} with id ${statusMessage.imageId}`}</p>
-                )}
                 {success && (
-                  <p className="succ">Save id for future reference</p>
+                  <p className="succ">Image added to gallery successfully</p>
                 )}
               </form>
             )}
@@ -217,7 +217,7 @@ const ManageRoute = () => {
                 </div>
                 <div>
                   <div>
-                    <button type="submit" className="form-btn delete" disabled>
+                    <button type="submit" className="form-btn delete">
                       Delete image
                     </button>
                   </div>

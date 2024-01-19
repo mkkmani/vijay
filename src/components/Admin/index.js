@@ -9,6 +9,8 @@ const Admin = () => {
   const [errMsg, setErrMsg] = useState(false);
   const history = useHistory();
 
+  const baseApi = process.env.REACT_APP_API_BASE_URL;
+
   useEffect(() => {
     const token = Cookies.get("artToken");
     if (token !== undefined) {
@@ -24,7 +26,7 @@ const Admin = () => {
   const onClickLogin = async (e) => {
     e.preventDefault();
     try {
-      const apiUrl = "https://vijayarts.onrender.com/admin/login";
+      const apiUrl = `${baseApi}/login`;
       const details = {
         username: loginData.username,
         password: loginData.password,

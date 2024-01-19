@@ -10,6 +10,11 @@ const Contact = () => {
   const [commentSubmissionStatus, setCommentSubmissionStatus] = useState(null);
   const [detailsSubmissionStatus, setDetailsSubmissionStatus] = useState(null);
 
+  const baseApi = process.env.REACT_APP_API_BASE_URL;
+  const wtspLink = process.env.REACT_APP_WHATSAPP_LINK;
+  const instaLink = process.env.REACT_APP_INSTA_PAGE_LINK;
+  const emailLink = process.env.REACT_APP_EMAIL_LINK;
+
   const handleChange = (e) => {
     setComment(e.target.value);
   };
@@ -20,7 +25,7 @@ const Contact = () => {
     setCommentSubmissionStatus(null);
     try {
       const details = { comment };
-      const api = "https://vijayarts.onrender.com/comment";
+      const api = `${baseApi}/comment`;
       const options = {
         method: "POST",
         headers: {
@@ -59,7 +64,7 @@ const Contact = () => {
     setCommentSubmissionStatus(null);
     try {
       const details = { name, contact: contactInfo };
-      const api = "https://vijayarts.onrender.com/contact";
+      const api = `${baseApi}/contact`;
       const options = {
         method: "POST",
         headers: {
@@ -87,21 +92,18 @@ const Contact = () => {
   };
 
   const handleInstagramClick = () => {
-    window.open("https://www.instagram.com/art_gallery_02_05/?hl=en", "_blank");
+    window.open(instaLink, "_blank");
   };
 
   const handleWhatsappClick = () => {
-    const phoneNumber = "+916301312993";
     const message = "Hello! Art gallery";
 
-    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(
-      message
-    )}`;
+    const whatsappUrl = `${wtspLink}?text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, "_blank");
   };
 
   const handleEmailClick = () => {
-    window.location.href = "mailto:vijaykumarkosireddy@gmail.com";
+    window.location.href = emailLink;
   };
 
   return (

@@ -17,7 +17,8 @@ const ArtsPage = () => {
     setApiStatus(apiStatusList.loading);
     const fetchImages = async () => {
       try {
-        const api = "https://vijayarts.onrender.com/gallery";
+        const baseApi = process.env.REACT_APP_API_BASE_URL;
+        const api = `${baseApi}/gallery`;
         const options = {
           method: "GET",
         };
@@ -43,8 +44,8 @@ const ArtsPage = () => {
       content = (
         <div className="loader-container">
           <TailSpin
-            height="60"
-            width="60"
+            height="40"
+            width="40"
             radius="9"
             color="skyblue"
             ariaLabel="three-dots-loading"
