@@ -26,7 +26,7 @@ const Admin = () => {
   const onClickLogin = async (e) => {
     e.preventDefault();
     try {
-      const apiUrl = `${baseApi}/login`;
+      const apiUrl = `${baseApi}/admin/login`;
       const details = {
         username: loginData.username,
         password: loginData.password,
