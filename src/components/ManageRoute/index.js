@@ -8,6 +8,8 @@ const ManageRoute = () => {
   const [name, setName] = useState("");
   const [imageLink, setImageLink] = useState("");
   const [imageId, setImageId] = useState("");
+  const [removeMsg, setRemoveMsg] = useState(false);
+  // eslint-disable-next-line
   const [statusMessage, setStatusMessage] = useState([]);
   const [success, setSuccess] = useState(false);
   const [comments, setComments] = useState([]);
@@ -80,8 +82,10 @@ const ManageRoute = () => {
       body: JSON.stringify(details),
     };
     const result = await fetch(api, options);
-    const data = result.json();
-    console.log("remove image data", data);
+    if (result.ok) {
+      setRemoveMsg(true);
+    }
+    setImageId("");
   };
 
   const viewComments = async (e) => {
@@ -216,12 +220,13 @@ const ManageRoute = () => {
                   />
                 </div>
                 <div>
-                  <div>
-                    <button type="submit" className="form-btn delete">
-                      Delete image
-                    </button>
-                  </div>
+                  <button type="submit" className="form-btn delete">
+                    Delete image
+                  </button>
                 </div>
+                {removeMsg && (
+                  <p style={{ color: "red" }}>Image removed successfully</p>
+                )}
               </form>
             )}
           </div>
