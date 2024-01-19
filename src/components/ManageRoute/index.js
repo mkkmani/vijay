@@ -70,7 +70,7 @@ const ManageRoute = () => {
     e.preventDefault();
 
     const api = `${baseApi}/gallery`;
-    const details = { name: imageId };
+    const details = { imageName: imageId };
     const options = {
       method: "DELETE",
       headers: {
